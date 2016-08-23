@@ -22,4 +22,4 @@ app.get('/', (req, res) => {
   })
   .catch(err => res.json({error: err}))
 })
-app.listen(3000, () => console.log('runinig...'))
+app.listen(process.env.PORT || 3000, () => console.log('runinig...'))
