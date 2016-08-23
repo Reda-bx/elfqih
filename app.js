@@ -5,7 +5,7 @@ var moment = require('moment')
 var KEY = 'a95015e8416df0519c21af85a9cf4e02'
 var url = `http://muslimsalat.com/daily.json?key=${KEY}`
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
   fetch(url)
   .then(response => response.json())
   .then(body => {
