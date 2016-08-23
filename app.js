@@ -13,10 +13,18 @@ app.post('/', (req, res) => {
     var _items = items[0]
     var arr = Object.keys(_items).map(function (key) {return {name: key, time: _items[key]}})
     var timeNow = moment().format()
-    var soon = {}
+    var text = ''
     arr.forEach((value, index) => {
+      if(index === 6) {
+        if(text === '') {
+          res.json({text: text})
+        }else{
+          text = 'Im Sleeping, come back at 00:00'
+          res.json({text: text})
+        }
+      }
       if(moment(timeNow, 'h:mm a').isBetween(moment(value.time, 'h:mm a'), moment(arr[index+1].time, 'h:mm a'))){
-        res.json({text: arr[index+1].name + 'at: ' + arr[index+1].time})
+        text = arr[index+1].name + 'at: ' + arr[index+1].time
       }
     })
   })
