@@ -23,7 +23,7 @@ app.post('/', (req, res) => {
     var soon = arr_of_items.filter((value) => value.time > timeNow)
     var _soon = soon[0]
     var text = 'Hi , Salat *' + _soon.name + '* in *'+ moment(timeNow, 'HH:mm').to(moment(soon[0].time, 'HH:mm'), true) + '*. Adan at: *' + _soon.time +'*'
-    res.send({text: text})
+    res.send({text: moment().format('HH:mm')})
   })
   .catch(err => res.json({error: err}))
 })
