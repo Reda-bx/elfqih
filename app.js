@@ -18,11 +18,11 @@ app.post('/', (req, res) => {
     var _items = body.items[0]
     var arr_of_items = Object.keys(_items).map(function (key) {return {name: key, time: _items[key]}})
     arr_of_items.shift()
-    arr_of_items.map(value => value.time = moment(value.time, 'h:mm a'))
-    var timeNow = moment().tz('Africa/Casablanca')
+    arr_of_items.map(value => value.time = moment(value.time, 'h:mm a').format('HH:mm'))
+    var timeNow = moment().tz('Africa/Casablanca').format('HH:mm')
     var soon = arr_of_items.filter((value) => value.time > timeNow)
     var _soon = soon[0]
-    var text = 'Hi , Salat *' + _soon.name + '* in *'+ moment(_soon.time.diff(timeNow)).format('hh:mm') + '*. Adan at: *' + _soon.time +'*'
+    var text = 'Hi , Salat *' + _soon.name + '* in *'+ moment(timeNow, 'HH:mm').to(moment(soon[0].time, 'HH:mm'), true) + '*. Adan at: *' + _soon.time +'*'
     res.send({text: text})
   })
   .catch(err => res.json({error: err}))
