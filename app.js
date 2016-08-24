@@ -13,6 +13,7 @@ app.post('/', (req, res) => {
   fetch(url)
   .then(response => response.json())
   .then(body => {
+    // TOOD: add username
     // get items
     var _items = body.items[0]
     var arr_of_items = Object.keys(_items).map(function (key) {return {name: key, time: _items[key]}})
@@ -21,7 +22,7 @@ app.post('/', (req, res) => {
     var timeNow = moment().format('HH:mm')
     var soon = arr_of_items.filter((value) => value.time > timeNow)
     var _soon = soon[0]
-    var text = 'Hi '+req.body.username+', Salat ' + _soon.name + ' in '+ moment(timeNow, 'HH:mm').to(moment(soon[0].time, 'HH:mm'), true) + '. Adan at !' + _soon.time
+    var text = 'Hi ', Salat ' + _soon.name + ' in '+ moment(timeNow, 'HH:mm').to(moment(soon[0].time, 'HH:mm'), true) + '. Adan at !' + _soon.time
     res.send({text: text})
   })
   .catch(err => res.json({error: err}))
